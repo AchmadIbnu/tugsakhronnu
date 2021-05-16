@@ -1,6 +1,7 @@
 //  Region Import External Lib (e.g React, Reactstrap, etc)
 import React, { useEffect, useState, useCallback, PureComponent } from 'react';
-import { Col, Row, Typography, Card } from 'antd';
+import { Col, Row, Typography, Card, DatePicker, TimePicker } from 'antd';
+import moment from 'moment';
 import {
 	LineChart,
 	Line,
@@ -14,6 +15,7 @@ import {
 } from "recharts";
 import imgTerkini from '../assets/dataterkinihitam.svg';
 import { realtime } from '../firebase'
+
 //  Region Import Utility/Helper Function
 
 //  Region Import Components
@@ -28,6 +30,8 @@ function Dataterkini() {
 
 //  react Hooks (useEffect, etc)
 // const classes = useStyles();
+const dateFormat = 'DD/MM/YYYY';
+const timeFormat = 'HH.mm.ss';
 const [data, setData]=useState([])
   // const [isOn, setValue] = useState(false)
 
@@ -39,6 +43,7 @@ const [data, setData]=useState([])
   })
 
   }, [])
+
 //  Function declaration (handle, onchange, etc)
 const datagrafik = [
 {
@@ -68,15 +73,20 @@ const datagrafik = [
 	prediksi: 2400,
 },
 ];
+
+
+
 return (
 	<>
 	<p style={{ fontSize: '2vw', wordWrap:'break-word', fontWeight: 'bold' }}>
 	<img src={imgTerkini} style={{maxWidth: '100%', maxHeight: '100%'}}/>
 	Pemantauan Energi
 	<span style={{fontStyle: 'italic'}}> Realtime</span>
+	<DatePicker defaultValue={moment()} format={dateFormat}disabled style={{marginLeft: 210}}/>
+	<TimePicker defaultValue={moment()} format={timeFormat}disabled />
 	</p>
-	<Row gutter={[10, 20]}>
-	<Col xs={24} sm={24} md={24} lg={8}>
+	<Row gutter={[12, 20]}>
+	<Col xs={22} sm={22} md={22} lg={10}>
 	<Row style={{ marginBottom: 10 }}>
 	<Card bordered={false} style={{ minWidth: '100%' }}>
 	<Typography.Title level={5}>{`Sisa kWh : ${'kWh'}` }</Typography.Title>
@@ -94,17 +104,17 @@ return (
 	</Card>
 	</Row>
 	</Col>
-	<Col lg={16} xs={{ order: 1, span: 24 }} sm={{ order: 1, span: 24  }} md={{ order: 2 }}>
+	<Col lg={14} xs={{ order: 1, span: 24 }} sm={{ order: 1, span: 24  }} md={{ order: 2 }}>
 	<Card  bordered={false} style={{ minWidth: '100%' }}>
-	<Typography.Title level={5}>GRAFIK PENGGUNAAN LISTRIK</Typography.Title>
+	<Typography.Title level={5}>GRAFIK PENGGUNAAN LISTRIK HARIAN</Typography.Title>
 	<LineChart
 	width={500}
 	height={300}
 	data={datagrafik}
 	margin={{
 		top: 5,
-		right: 30,
-		left: 5,
+		right: 45,
+		left: 0,
 		bottom: 5
 	}}
 	>

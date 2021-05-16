@@ -1,6 +1,7 @@
 //  Region Import External Lib (e.g React, Reactstrap, etc)
 import React, { useEffect, useState, useCallback } from 'react';
-import { Col, Row, Typography, Card, Table  } from 'antd';
+import { Col, Row, Typography, Card, Table, DatePicker, TimePicker } from 'antd';
+import moment from 'moment';
 import imgHistori from '../assets/historihitam.svg';
 //  Region Import Utility/Helper Function
 
@@ -230,6 +231,7 @@ const datalistrik = [
 	rupiah : '12500'
 },
 ];
+
 function Histori() {
 
 //  react Hooks (useEffect, etc)
@@ -237,13 +239,15 @@ function Histori() {
 
 
 //  Function declaration (handle, onchange, etc)
-
-
+const dateFormat = 'DD/MM/YYYY';
+const timeFormat = 'HH.mm.ss';
 return (
 	<>
 	<p style={{ fontStyle: 'italic', fontSize: '2vw', fontWeight: 'bold', wordWrap:'break-word' }}>
 	<img src={imgHistori} style={{maxWidth: '100%', maxHeight: '100%'}}/>
 	History & Alarm
+	<DatePicker defaultValue={moment()} format={dateFormat}disabled style={{marginLeft: 340}}/>
+	<TimePicker defaultValue={moment()} format={timeFormat}disabled />
 	</p>
 	<Row gutter={[20, 20]}>
 	<Col xs={24} sm={24} md={5} lg={12}>
@@ -252,7 +256,8 @@ return (
 	<p style={{fontWeight: 'bold',fontStyle: 'italic',fontSize: 20,}}>
 	Alarm
 	</p>
-	<Table columns={columns} dataSource={dataalarm} scroll={{ x: 10, y: 230 }} />,
+	<DatePicker picker='month'/>
+	<Table columns={columns} dataSource={dataalarm} scroll={{ x: 10, y: 200 }} />,
 	</Card>
 	</Row>
 	</Col>
@@ -261,7 +266,8 @@ return (
 	<p style={{fontWeight: 'bold',fontSize: 20,}}>
 	Riwayat Penggunaan Listrik
 	</p>
-	<Table columns={columns2} dataSource={datalistrik} scroll={{ x: 10, y: 230 }} />,
+	<DatePicker picker='month'/>
+	<Table columns={columns2} dataSource={datalistrik} scroll={{ x: 10, y: 200 }} />,
 	</Card>
 	</Col>
 	</Row>
